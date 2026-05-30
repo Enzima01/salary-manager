@@ -4,7 +4,7 @@
 Sistema desktop desenvolvido em Java para auxiliar no gerenciamento e planejamento do salário mensal.
 
 O usuário pode cadastrar categorias de gastos, definir porcentagens, criar gastos fixos e acompanhar automaticamente quanto do salário está comprometido e quanto ainda resta disponível.
-
+--
 ### ✨ Funcionalidades
 
 * Cadastro de categorias
@@ -77,7 +77,7 @@ O sistema pode gerar um relatório contendo:
 Desenvolvido por **Enzo Henrique Favaro**
 ##
 
-
+--
 
 # 💰 Salary Manager
 
