@@ -1,5 +1,4 @@
 # 💰 Gerenciador de Salário
----
 
 ## 🇧🇷
 Sistema desktop desenvolvido em Java para auxiliar no gerenciamento e planejamento do salário mensal.
@@ -81,7 +80,7 @@ Desenvolvido por **Enzo Henrique Favaro**
 
 
 # 💰 Salary Manager
---
+
 
 ## 🇺🇸
 Desktop application developed with Java to help users manage and plan their monthly salary.
