@@ -39,9 +39,9 @@ Exemplo:
 ```text
 Salário: $ 3.000
 
-Alimentação: 20%
-Lazer: 10%
-Investimentos: 15%
+Alimentação (20%): $ 600
+Lazer (10%): $ 300
+Investimentos (15%): $ 450
 ```
 
 O sistema calcula automaticamente os valores com base no salário informado.
@@ -123,9 +123,9 @@ Example:
 ```text
 Salary: $3,000
 
-Food: 20%
-Entertainment: 10%
-Investments: 15%
+Food (20%): $ 600
+Entertainment (10%): $ 300
+Investments (15%): $ 450
 ```
 
 The application automatically calculates the values based on the entered salary.
