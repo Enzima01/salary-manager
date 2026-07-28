@@ -1,6 +1,7 @@
 package application;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Window;
 import java.io.File;
@@ -20,7 +21,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -52,6 +55,11 @@ public class Program extends JFrame {
 	private boolean temaEscuro = true;
 
 	private JPanel painelCategorias;
+	private JScrollPane scrollCategorias;
+
+	// altura visível fixa do "viewport" do scroll (mesma altura original do painel)
+	private static final int ALTURA_VISIVEL_CATEGORIAS = 320;
+	private static final int LARGURA_CATEGORIAS = 462; // reduzida para não colidir com a scrollbar
 
 	private int y = 10;
 
@@ -198,15 +206,27 @@ public class Program extends JFrame {
 
 		btnCalcular.addActionListener(e -> calcular());
 
-		// PAINEL
+		// PAINEL (agora dentro de um JScrollPane)
 
 		painelCategorias = new JPanel();
 
 		painelCategorias.setLayout(null);
 
-		painelCategorias.setBounds(56, 190, 482, 320);
+		painelCategorias.setPreferredSize(new Dimension(LARGURA_CATEGORIAS, ALTURA_VISIVEL_CATEGORIAS));
 
-		contentPane.add(painelCategorias);
+		scrollCategorias = new JScrollPane(painelCategorias);
+
+		scrollCategorias.setBounds(56, 190, 482, ALTURA_VISIVEL_CATEGORIAS);
+
+		scrollCategorias.setBorder(null);
+
+		scrollCategorias.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+		scrollCategorias.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+		scrollCategorias.getVerticalScrollBar().setUnitIncrement(16);
+
+		contentPane.add(scrollCategorias);
 
 		// TOTAL
 
@@ -321,7 +341,7 @@ public class Program extends JFrame {
 			}
 
 			lbl.setFont(new Font("SansSerif", Font.PLAIN, 20));
-			lbl.setBounds(10, y, 220, 35);
+			lbl.setBounds(10, y, 200, 35);
 
 			painelCategorias.add(lbl);
 
@@ -330,7 +350,7 @@ public class Program extends JFrame {
 			categoria.setCampoValor(txt);
 
 			txt.setFont(new Font("SansSerif", Font.PLAIN, 18));
-			txt.setBounds(240, y, 110, 35);
+			txt.setBounds(220, y, 100, 35);
 
 			if (categoria.getTipo().equals("Porcentagem")) {
 
@@ -347,7 +367,7 @@ public class Program extends JFrame {
 
 			JButton btnEditar = new JButton("✏");
 
-			btnEditar.setBounds(360, y, 50, 35);
+			btnEditar.setBounds(330, y, 50, 35);
 
 			painelCategorias.add(btnEditar);
 
@@ -362,7 +382,7 @@ public class Program extends JFrame {
 
 			btnExcluir.setForeground(Color.RED);
 
-			btnExcluir.setBounds(420, y, 50, 35);
+			btnExcluir.setBounds(390, y, 50, 35);
 
 			painelCategorias.add(btnExcluir);
 
@@ -382,10 +402,16 @@ public class Program extends JFrame {
 			y += 50;
 		}
 
+		// altura do conteúdo: cresce conforme necessário, nunca menor que a área visível
+		int alturaConteudo = Math.max(y + 10, ALTURA_VISIVEL_CATEGORIAS);
+
+		painelCategorias.setPreferredSize(new Dimension(LARGURA_CATEGORIAS, alturaConteudo));
+
 		painelCategorias.repaint();
 		painelCategorias.revalidate();
 
-		setSize(610, 740);
+		scrollCategorias.revalidate();
+		scrollCategorias.repaint();
 	}
 
 	// CALCULAR
